@@ -1,0 +1,583 @@
+/* Estilos generales */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #006657 0%, #BC955C 50%, #691C32 100%);
+    color: #fff;
+    overflow-x: hidden;
+    text-align: justify;
+}
+
+/* Encabezado */
+.header {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 102, 87, 0.8); /* #006657 con alfa */
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #BC955C;
+}
+
+/* Contenedor */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Tarjeta con glassmorfismo */
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in;
+    border: 1px solid rgba(188, 149, 92, 0.5); /* #BC955C con alfa */
+}
+
+/* Animación */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section {
+    display: none;
+    animation: fadeIn 0.5s ease-in; /* Aplicar a secciones al mostrarse */
+}
+
+.section.active {
+    display: block;
+}
+
+/* Botones */
+.btn {
+    background: linear-gradient(45deg, #006657, #BC955C);
+    color: #fff;
+    padding: 12px 25px; /* Ligeramente más grandes */
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600; /* Texto de botón más destacado */
+    transition: transform 0.3s ease, background 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    margin: 5px;
+}
+
+.btn:hover, .btn:focus { /* Añadido :focus para accesibilidad */
+    transform: scale(1.05);
+    background: linear-gradient(45deg, #BC955C, #691C32);
+    outline: 2px solid #FFD700; /* Outline para foco */
+    outline-offset: 2px;
+}
+
+.btn.secondary {
+    background: linear-gradient(45deg, #691C32, #BC955C);
+}
+
+.btn.secondary:hover, .btn.secondary:focus { /* Añadido :focus para accesibilidad */
+    background: linear-gradient(45deg, #BC955C, #006657);
+}
+
+/* Botones flotantes */
+.chatbot-button, .logout-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 102, 87, 0.9); /* #006657 con más opacidad */
+    color: #BC955C;
+    padding: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centrar ícono si el texto se oculta */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    z-index: 1000;
+}
+
+.logout-button {
+    right: auto;
+    left: 20px;
+}
+
+.chatbot-button:hover, .logout-button:hover,
+.chatbot-button:focus, .logout-button:focus { /* Añadido :focus para accesibilidad */
+    transform: scale(1.1);
+    background-color: rgba(188, 149, 92, 0.9); /* #BC955C con alfa */
+    outline: none; /* Estilo de foco personalizado si es necesario, o dejar el del navegador */
+}
+
+.chatbot-button span, .logout-button span {
+    margin-left: 8px; /* Espacio entre ícono y texto */
+    font-size: 14px;
+    color: #fff; /* Texto blanco para mejor contraste sobre el nuevo hover */
+}
+
+.chatbot-icon, .logout-icon {
+    width: 24px; /* Iconos ligeramente más grandes */
+    height: 24px;
+    /* margin-right: está en el span ahora */
+}
+.chatbot-button svg, .logout-button svg {
+    stroke: #FFD700; /* Color de stroke más brillante */
+}
+
+
+/* Menú flotante */
+.floating-menu {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(105, 28, 50, 0.85); /* #691C32 con alfa */
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    display: none; /* Se activa por JS */
+    z-index: 999;
+}
+
+.floating-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.floating-menu ul li a {
+    color: #BC955C;
+    text-decoration: none;
+    padding: 8px 12px;
+    display: block;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.floating-menu ul li a:hover, .floating-menu ul li a:focus { /* Añadido :focus */
+    background: rgba(188, 149, 92, 0.3); /* #BC955C con alfa */
+    color: #FFD700; /* Color dorado más brillante para el texto en hover/focus */
+    outline: none;
+}
+
+/* Progreso */
+.progress-bar {
+    width: 80%;
+    height: 12px; /* Ligeramente más grueso */
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    margin: 20px auto;
+    overflow: hidden; /* Para que el progreso interno no desborde el radio */
+}
+
+.progress {
+    height: 100%;
+    background: #BC955C;
+    border-radius: 6px; /* Mismo radio que el contenedor */
+    width: 0; /* Controlado por JS */
+    transition: width 0.5s ease-out; /* Transición más suave */
+}
+
+/* Formularios */
+.input-group {
+    margin: 20px 0; /* Más espaciado vertical */
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px; /* Más espacio bajo la etiqueta */
+    color: #FFD700;
+    font-weight: 600;
+}
+
+.input-group input[type="text"],
+.input-group input[type="email"],
+.input-group textarea {
+    width: calc(100% - 22px); /* Ajustar por padding y borde */
+    padding: 12px 10px; /* Padding más generoso */
+    border: 1px solid rgba(188, 149, 92, 0.5); /* #BC955C con alfa */
+    border-radius: 8px; /* Bordes más redondeados */
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.05); /* Fondo muy sutil */
+    color: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input[type="text"]:focus,
+.input-group input[type="email"]:focus,
+.input-group textarea:focus {
+    border-color: #FFD700;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.5); /* Sombra dorada al enfocar */
+    outline: none;
+}
+
+.input-group textarea {
+    min-height: 80px; /* Altura mínima para textareas */
+    resize: vertical; /* Permitir redimensionar verticalmente */
+}
+
+
+.error {
+    color: #FF6347; /* Rojo tomate, más visible */
+    font-size: 13px;
+    font-weight: 500;
+    display: none; /* Se activa por JS */
+    margin-top: 5px;
+}
+
+.message {
+    color: #32CD32; /* Verde lima */
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: rgba(50, 205, 50, 0.1);
+    border: 1px solid #32CD32;
+    border-radius: 5px;
+    display: none; /* Se activa por JS */
+}
+
+.saved-responses {
+    margin-top: 20px;
+    color: #FFD700;
+    background: rgba(0, 102, 87, 0.5); /* #006657 con alfa */
+    padding: 15px;
+    border-radius: 8px;
+    text-align: left;
+    display: none; /* Se activa por JS */
+}
+.saved-responses h4 {
+    margin-top: 0;
+    color: #fff;
+    border-bottom: 1px solid #BC955C;
+    padding-bottom: 5px;
+}
+.saved-responses p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* Íconos y elementos visuales */
+.db-icon {
+    width: 100px;
+    height: 100px;
+    margin: 20px auto;
+    display: block; /* Asegurar que es un bloque para centrado con margin auto */
+}
+
+/* Animación para el icono de la portada */
+.portada-db-icon {
+    animation: pulseDbIcon 3s infinite ease-in-out;
+}
+
+@keyframes pulseDbIcon {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.08); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
+}
+
+
+.video-container {
+    margin: 25px 0;
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px; /* Bordes redondeados para el contenedor */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none; /* Sin borde para el iframe */
+}
+
+.quiz-overlay {
+    position: fixed; /* Cubrir toda la pantalla */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Más oscuro */
+    display: none; /* Se activa con JS */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Por encima de todo */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.quiz-content {
+    background: rgba(105, 28, 50, 0.95); /* #691C32 con más opacidad */
+    backdrop-filter: blur(8px);
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    color: #FFD700; /* Texto dorado para preguntas */
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.quiz-content h3 {
+    color: #fff;
+    margin-top: 0;
+    border-bottom: 1px solid #BC955C;
+    padding-bottom: 10px;
+}
+.quiz-content p { /* Estilo para el texto de la pregunta */
+    color: #fff;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+.quiz-content label { /* Estilo para las opciones del quiz MCQ */
+    display: block;
+    margin: 8px 0;
+    padding: 10px;
+    background-color: rgba(0, 102, 87, 0.7); /* #006657 con alfa */
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.quiz-content label:hover {
+    background-color: rgba(188, 149, 92, 0.7); /* #BC955C con alfa */
+}
+.quiz-content input[type="radio"] {
+    margin-right: 10px;
+    accent-color: #FFD700; /* Color del radio button */
+}
+
+/* Estilos para Drag and Drop y Match Questions */
+.drag-drop-container, .match-columns-container {
+    margin: 20px 0;
+}
+.draggable-items .draggable, .match-item.draggable {
+    padding: 10px;
+    margin: 5px;
+    background-color: #006657;
+    border: 1px solid #BC955C;
+    border-radius: 5px;
+    cursor: grab;
+    color: #fff;
+}
+.dropzone {
+    padding: 15px;
+    border: 2px dashed #BC955C;
+    background-color: rgba(188,149,92,0.1);
+    border-radius: 5px;
+    text-align: center;
+    color: #FFD700;
+    min-height: 40px;
+}
+.ui-state-hover { /* Clase de jQuery UI para hover en droppable */
+    background-color: rgba(188,149,92,0.3);
+}
+.dropped-item-display { /* Para mostrar el texto del item droppeado en match */
+    font-size: 0.9em;
+    color: #fff;
+    background-color: rgba(0, 102, 87, 0.5);
+    padding: 5px;
+    border-radius: 3px;
+    margin-top: 5px;
+}
+
+
+.certificate {
+    border: 3px solid #BC955C; /* Borde más grueso */
+    padding: 30px;
+    margin: 20px 0;
+    background: linear-gradient(to bottom right, rgba(0, 102, 87, 0.7), rgba(105, 28, 50, 0.7)); /* Gradiente de fondo */
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(188, 149, 92, 0.5); /* Sombra dorada */
+    color: #fff;
+}
+.certificate h3 {
+    color: #FFD700;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+#cert-text {
+    font-size: 1.1em;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+#qr-code {
+    background-color: #fff; /* Fondo blanco para el QR para mejor lectura */
+    padding: 5px;
+    border-radius: 5px;
+    display: inline-block; /* Para centrar con margin auto si es necesario */
+}
+
+
+.infographic {
+    margin: 25px 0;
+}
+.infographic svg text { /* Estilo general para texto en infografía SVG */
+    font-family: 'Poppins', sans-serif;
+}
+
+.ai-icon {
+    width: 60px; /* Icono IA más grande */
+    height: 60px;
+    margin: 20px auto;
+    display: block;
+}
+.ai-icon path, .ai-icon circle { /* Ajustar stroke del icono IA */
+    stroke: #FFD700;
+    stroke-width: 1.5;
+}
+
+
+/* Estilos para Evaluación Final */
+#finalQuizForm .question {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 8px;
+    text-align: left;
+}
+#finalQuizForm .question p { /* Texto de la pregunta */
+    font-weight: 600;
+    color: #FFD700;
+    margin-bottom: 10px;
+}
+#finalQuizForm .question label {
+    display: block;
+    padding: 8px;
+    margin: 5px 0;
+    background-color: rgba(255,255,255,0.05);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+#finalQuizForm .question label:hover {
+    background-color: rgba(188, 149, 92, 0.3);
+}
+#finalQuizForm .question input[type="radio"] {
+    margin-right: 10px;
+    accent-color: #FFD700;
+}
+
+#quizFeedback {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+#quizFeedback p {
+    margin: 5px 0;
+}
+/* Estilo para el texto de feedback individual de preguntas */
+.feedback-text {
+    font-weight: bold;
+    font-size: 0.9em;
+    margin-left: 5px;
+}
+
+
+/* Responsivo */
+@media (max-width: 768px) { /* Breakpoint para tablets */
+    .card {
+        padding: 20px;
+    }
+    .floating-menu {
+        padding: 8px;
+    }
+    .floating-menu ul li a {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+    .chatbot-button span, .logout-button span {
+        display: none; /* Ocultar texto en móviles para botones flotantes */
+    }
+    .chatbot-button, .logout-button {
+        padding: 12px; /* Ajustar padding si solo es ícono */
+    }
+    .chatbot-icon, .logout-icon {
+        margin-right: 0; /* Sin margen si no hay texto */
+    }
+
+}
+
+
+@media (max-width: 600px) {
+    body {
+        text-align: left; /* Ajustar justificación en móviles si es necesario */
+    }
+    .header h1 { font-size: 1.8em; }
+    .header h2 { font-size: 1.1em; }
+
+    .card {
+        padding: 15px;
+    }
+    .btn {
+        width: calc(100% - 10px); /* Botones ocupan más ancho */
+        margin: 8px 5px;
+        padding: 12px 15px;
+        font-size: 15px;
+    }
+    .chatbot-button, .logout-button {
+        bottom: 10px;
+        right: 10px;
+    }
+    .logout-button {
+        left: 10px;
+    }
+
+    .floating-menu {
+        top: 10px;
+        left: 10px;
+        width: auto; /* Ajustar ancho */
+    }
+    
+    .input-group input[type="text"],
+    .input-group input[type="email"],
+    .input-group textarea {
+        width: calc(100% - 22px); /* Ya estaba así, verificar si es necesario */
+    }
+    .quiz-content {
+        padding: 20px;
+    }
+    .infographic svg {
+        width: 100%; /* SVG de infografía se ajusta mejor */
+    }
+}
+
+input:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible {
+    outline: 3px solid #FFBF00;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px rgba(0, 102, 87, 0.5);
+}
+
+input, textarea, button, a {
+    outline: none;
+}
+
+
+/* Movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }   
+}

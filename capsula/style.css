@@ -1,0 +1,301 @@
+/* Estilos generales */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #006657 0%, #BC955C 50%, #691C32 100%);
+    color: #fff;
+    overflow-x: hidden;
+    text-align: justify;
+}
+
+/* Encabezado */
+.header {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 102, 87, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #BC955C;
+}
+
+/* Contenedor */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Tarjeta con glassmorfismo */
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in;
+    border: 1px solid rgba(188, 149, 92, 0.5);
+}
+
+/* Animación */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+/* Botones */
+.btn {
+    background: linear-gradient(45deg, #006657, #BC955C);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(45deg, #BC955C, #691C32);
+}
+
+.btn.secondary {
+    background: linear-gradient(45deg, #691C32, #BC955C);
+}
+
+.btn.secondary:hover {
+    background: linear-gradient(45deg, #BC955C, #006657);
+}
+
+/* Botones flotantes */
+.chatbot-button, .logout-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 102, 87, 0.8);
+    color: #BC955C;
+    padding: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+.logout-button {
+    right: auto;
+    left: 20px;
+}
+
+.chatbot-button:hover, .logout-button:hover {
+    transform: scale(1.1);
+}
+
+.chatbot-icon, .logout-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* Menú flotante */
+.floating-menu {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(105, 28, 50, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: none;
+}
+
+.floating-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.floating-menu ul li a {
+    color: #BC955C;
+    text-decoration: none;
+    padding: 5px 10px;
+    display: block;
+}
+
+.floating-menu ul li a:hover {
+    background: rgba(188, 149, 92, 0.2);
+    border-radius: 5px;
+}
+
+/* Progreso */
+.progress-bar {
+    width: 80%;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    margin: 20px auto;
+}
+
+.progress {
+    height: 100%;
+    background: #BC955C;
+    border-radius: 5px;
+    width: 0;
+    transition: width 0.3s;
+}
+
+/* Formularios */
+.input-group {
+    margin: 15px 0;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #FFD700; /* Ajuste de color para mayor contraste */
+    font-weight: 600;
+}
+
+.input-group input, .input-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(188, 149, 92, 0.5);
+    border-radius: 5px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.error {
+    color: #FF4500;
+    font-size: 12px;
+    display: none;
+}
+
+.message {
+    color: #32CD32;
+    font-size: 14px;
+    margin-top: 10px;
+    display: none;
+}
+
+.saved-responses {
+    margin-top: 20px;
+    color: #FFD700;
+    background: rgba(0, 102, 87, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+}
+
+/* Íconos y elementos visuales */
+.db-icon {
+    width: 100px;
+    height: 100px;
+    margin: 20px auto;
+}
+
+.video-container {
+    margin: 20px 0;
+    position: relative;
+}
+
+.quiz-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quiz-content {
+    background: rgba(105, 28, 50, 0.9);
+    backdrop-filter: blur(5px);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: #BC955C;
+}
+
+.certificate {
+    border: 2px solid #BC955C;
+    padding: 20px;
+    margin: 20px 0;
+    background: rgba(0, 102, 87, 0.5);
+    border-radius: 10px;
+}
+
+.infographic {
+    margin: 20px 0;
+}
+
+.ai-icon {
+    width: 50px;
+    height: 50px;
+    margin: 10px auto;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+    .card {
+        padding: 15px;
+    }
+    .btn {
+        width: 100%;
+        margin: 5px 0;
+    }
+    .chatbot-button, .logout-button {
+        bottom: 10px;
+        right: 10px;
+    }
+    .logout-button {
+        left: 10px;
+    }
+    .floating-menu {
+        top: 10px;
+        left: 10px;
+    }
+    .video-container iframe {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Accesibilidad WCAG 2.1 AA */
+input:focus, textarea:focus {
+    outline: 2px solid #BC955C;
+    outline-offset: 2px;
+}
+
+button:focus {
+    outline: 2px solid #BC955C;
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn {
+        transition: none;
+    }
+    .chatbot-button, .logout-button {
+        transition: none;
+    }
+}

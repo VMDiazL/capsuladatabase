@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cápsula Educativa: Diseño de Bases de Datos</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.0/build/qrcode.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  </head>
+  <body>
+    <header class="header" role="banner">
+      <h1>Cápsula Educativa</h1>
+      <h2>Diseño de Bases de Datos</h2>
+    </header>
+
+    <!-- Botón flotante de Chatbot -->
+    <div
+      class="chatbot-button"
+      onclick="openChatbot()"
+      aria-label="Abrir Chatbot de Ayuda"
+    >
+      <svg
+        class="chatbot-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#BC955C"
+        stroke-width="2"
+      >
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-12h2v2h-2zm0 4h2v2h-2z"
+        />
+      </svg>
+      <span>Chatbot de Ayuda</span>
+    </div>
+
+    <!-- Botón de Cerrar Sesión -->
+    <div
+      class="logout-button"
+      onclick="clearLocalStorage()"
+      aria-label="Cerrar Sesión"
+    >
+      <svg
+        class="logout-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#BC955C"
+        stroke-width="2"
+      >
+        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" />
+      </svg>
+      <span>Cerrar Sesión</span>
+    </div>
+
+    <!-- Menú flotante -->
+    <nav
+      class="floating-menu"
+      id="floatingMenu"
+      role="navigation"
+      aria-label="Menú de Navegación"
+    >
+      <ul>
+        <li><a href="#portada" onclick="showSection('portada')">Portada</a></li>
+        <li>
+          <a href="#introduccion" onclick="showSection('introduccion')"
+            >Introducción</a
+          >
+        </li>
+        <li>
+          <a href="#activacion" onclick="showSection('activacion')"
+            >Activación</a
+          >
+        </li>
+        <li>
+          <a href="#desarrollo" onclick="showSection('desarrollo')"
+            >Desarrollo</a
+          >
+        </li>
+        <li>
+          <a
+            href="#evaluacion-formativa"
+            onclick="showSection('evaluacion-formativa')"
+            >Evaluación Formativa</a
+          >
+        </li>
+        <li>
+          <a href="#evaluacion" onclick="showSection('evaluacion')"
+            >Evaluación</a
+          >
+        </li>
+        <li>
+          <a href="#sintesis" onclick="showSection('sintesis')">Síntesis</a>
+        </li>
+        <li><a href="#cierre" onclick="showSection('cierre')">Cierre</a></li>
+        <li>
+          <a href="#certificado" onclick="showSection('certificado')"
+            >Certificado</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Indicador de progreso -->
+    <div
+      class="progress-bar"
+      role="progressbar"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+    >
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <!-- Formulario de Ingreso -->
+    <section id="formulario" class="section active">
+      <div class="container">
+        <div class="card">
+          <h1>¡Bienvenid@!</h1>
+          <p>
+            Ingresa tus datos (Nombre completo y Correo electrónico) para
+            comenzar. Estos datos son necesarios para generar tu certificado de
+            aprobación.
+          </p>
+          <form id="userForm" novalidate>
+            <div class="input-group">
+              <label for="nombre">Nombre Completo:</label>
+              <input
+                type="text"
+                id="nombre"
+                required
+                aria-required="true"
+                aria-describedby="nombre-error"
+              />
+              <span id="nombre-error" class="error" role="alert"></span>
+            </div>
+            <div class="input-group">
+              <label for="correo">Correo Electrónico:</label>
+              <input
+                type="email"
+                id="correo"
+                required
+                aria-required="true"
+                aria-describedby="correo-error"
+              />
+              <span id="correo-error" class="error" role="alert"></span>
+            </div>
+            <button type="submit" class="btn">Iniciar Curso</button>
+            <button
+              type="button"
+              onclick="clearLocalStorage()"
+              class="btn secondary"
+            >
+              Borrar Datos
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portada -->
+    <section id="portada" class="section">
+      <div class="container">
+        <div class="card">
+          <h1>Diseño de Bases de Datos</h1>
+          <svg
+            class="db-icon"
+            viewBox="0 0 100 100"
+            fill="none"
+            stroke="#BC955C"
+            stroke-width="2"
+          >
+            <ellipse cx="50" cy="20" rx="40" ry="10" fill="#006657" />
+            <ellipse cx="50" cy="50" rx="40" ry="10" fill="#691C32" />
+            <ellipse cx="50" cy="80" rx="40" ry="10" fill="#006657" />
+            <path d="M10 20v60M90 20v60" stroke="#BC955C" />
+          </svg>
+          <p>
+            Explora el fascinante mundo del diseño de bases de datos con esta
+            cápsula educativa diseñada para ti.
+          </p>
+          <button class="btn" onclick="showSection('introduccion')">
+            ¡Empezar!
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Introducción -->
+    <section id="introduccion" class="section">
+      <div class="container">
+        <div class="card">
+          <h2>Introducción al Diseño de Bases de Datos</h2>
+          <p>
+            En esta cápsula, aprenderás los fundamentos del modelamiento de
+            datos, desde el diseño conceptual que captura entidades y
+            relaciones, hasta el diseño lógico con normalización y el diseño
+            físico con optimización SQL. Basado en el video 'Modelamiento de
+            Datos | Diseño Conceptual, Lógico y Físico | SQL - Base de Datos',
+            exploraremos cómo estructurar datos de manera eficiente.
+          </p>
+          <h3>Objetivos:</h3>
+          <ul>
+            <li>Comprender el modelamiento de datos y sus etapas.</li>
+            <li>Diferenciar diseño conceptual, lógico y físico.</li>
+            <li>Aplicar técnicas de normalización y optimización.</li>
+          </ul>
+          <svg
+            class="db-icon"
+            viewBox="0 0 100 100"
+            fill="none"
+            stroke="#BC955C"
+            stroke-width="2"
+          >
+            <rect x="20" y="20" width="60" height="60" rx="10" fill="#006657" />
+            <path d="M30 40h40M30 60h40" stroke="#BC955C" />
+          </svg>
+          <button class="btn" onclick="showSection('activacion')">
+            Siguiente
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Activación -->
+    <section id="activacion" class="section">
+      <div class="container">
+        <div class="card">
+          <h2>Activación de Conocimientos</h2>
+          <p>
+            ¡Ponte a prueba! Resuelve este juego Educaplay para rescatar tus
+            conocimientos previos sobre bases de datos. Sigue las instrucciones
+            en pantalla y completa la actividad.
+          </p>
+          <iframe
+            allow="fullscreen; autoplay; allow-top-navigation-by-user-activation"
+            allowfullscreen
+            width="795"
+            height="690"
+            frameborder="0"
+            src="https://es.educaplay.com/juego/24339351-desafio_de_diseno_de_base_de_datos.html"
+          ></iframe>
+          <button class="btn" onclick="showSection('desarrollo')">
+            Continuar
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Desarrollo -->
+    <section id="desarrollo" class="section">
+      <div class="container">
+        <div class="card">
+          <h2>Desarrollo: Fundamentos del Diseño</h2>
+          <div class="content-block">
+            <h3>Diseño Conceptual</h3>
+            <svg
+              class="db-icon"
+              viewBox="0 0 100 100"
+              fill="none"
+              stroke="#BC955C"
+              stroke-width="2"
+            >
+              <circle cx="50" cy="50" r="40" fill="#006657" />
+              <path d="M30 50h40M50 30v40" stroke="#BC955C" />
+            </svg>
+            <p>
+              Identifica entidades y relaciones mediante diagramas ER para
+              capturar los requisitos del usuario.
+            </p>
+          </div>
+          <div class="content-block">
+            <h3>Diseño Lógico</h3>
+            <svg
+              class="db-icon"
+              viewBox="0 0 100 100"
+              fill="none"
+              stroke="#BC955C"
+              stroke-width="2"
+            >
+              <rect
+                x="20"
+                y="20"
+                width="60"
+                height="60"
+                rx="10"
+                fill="#691C32"
+              />
+              <path d="M30 40h40M30 60h40" stroke="#BC955C" />
+            </svg>
+            <p>
+              Transforma el modelo en tablas, define claves y aplica
+              normalización (1NF, 2NF, 3NF).
+            </p>
+          </div>
+          <div class="content-block">
+            <h3>Diseño Físico</h3>
+            <svg
+              class="db-icon"
+              viewBox="0 0 100 100"
+              fill="none"
+              stroke="#BC955C"
+              stroke-width="2"
+            >
+              <path d="M20 20h60v60H20z" fill="#006657" />
+              <path d="M40 30h20M40 50h20M40 70h20" stroke="#BC955C" />
+            </svg>
+            <p>
+              Optimiza consultas SQL, crea índices y asegura integración con
+              interfaces.
+            </p>
+          </div>
+          <div class="video-container">
+            <iframe
+              id="videoPlayer"
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/AOWZiqKb7LU?si=lwDARCqBPG9TnTN4&enablejsapi=1"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+            <div id="quizOverlay" class="quiz-overlay" style="display: none">
+              <div class="quiz-content">
+                <h3>Pregunta</h3>
+                <div id="quizQuestion"></div>
+                <button onclick="submitQuizAnswer()">Enviar</button>
+              </div>
+            </div>
+          </div>
+          <button class="btn" onclick="showSection('evaluacion-formativa')">
+            Siguiente
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Evaluación Formativa -->
+    <section id="evaluacion-formativa" class="section">
+      <div class="container">
+        <div class="card">
+          <h2>Evaluación Formativa</h2>
+          <p>
+            Refuerza lo aprendido con esta actividad interactiva. Sigue las
+            instrucciones en pantalla.
+          </p>
+          <iframe
+            allow="fullscreen; autoplay; allow-top-navigation-by-user-activation"
+            allowfullscreen
+            width="795"
+            height="690"
+            frameborder="0"
+            src="https://es.educaplay.com/juego/24339351-desafio_de_diseno_de_base_de_datos.html"
+          ></iframe>
+          <button class="btn" onclick="showSection('evaluacion')">
+            Siguiente
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Evaluación -->
+    <section id="evaluacion" class="section">
+      <div class="container">
+        <div class="card">
+          <h2>Evaluación Final</h2>
+          <h3>Preguntas de Opción Múltiple (Comprensión y Aplicación)</h3>
+          <div class="question">
+            <p>1. ¿Qué representa un diagrama ER en el diseño conceptual?</p>
+            <label
+              ><input type="radio" name="q1" value="a" /> a) Esquema
+              físico</label
+            >
+            <label
+              ><input type="radio" name="q1" value="b" /> b) Modelo de entidades
+              y relaciones</label
+            >
+            <label
+              ><input type="radio" name="q1" value="c" /> c) Lenguaje de
+              consulta</label
+            >
+            <label
+              ><input type="radio" name="q1" value="d" /> d) Índice de
+              rendimiento</label
+            >
+          </div>
+          <div class="question">
+            <p>2. ¿Cómo aplica la normalización en una base de datos?</p>
+            <label
+              ><input type="radio" name="q2" value="a" /> a) Aumenta
+              redundancias</label
+            >
+            <label
+              ><input type="radio" name="q2" value="b" /> b) Reduce
+              anomalías</label
+            >
+            <label
+              ><input type="radio" name="q2" value="c" /> c) Elimina
+              claves</label
+            >
+            <label
+              ><input type="radio" name="q2" value="d" /> d) Optimiza
+              hardware</label
+            >
+          </div>
+          <div class="question">
+            <p>3. ¿Qué hace una clave primaria en la práctica?</p>
+            <label
+              ><input type="radio" name="q3" value="a" /> a) Permite
+              duplicados</label
+            >
+            <label
+              ><input type="radio" name="q3" value="b" /> b) Identifica
+              registros únicos</label
+            >
+            <label
+              ><input type="radio" name="q3" value="c" /> c) Almacena
+              relaciones</label
+            >
+            <label
+              ><input type="radio" name="q3" value="d" /> d) Define
+              índices</label
+            >
+          </div>
+          <div class="question">
+            <p>4. ¿Cómo se implementa el diseño físico?</p>
+            <label
+              ><input type="radio" name="q4" value="a" /> a) Con diagramas
+              ER</label
+            >
+            <label
+              ><input type="radio" name="q4" value="b" /> b) Con optimización
+              SQL</label
+            >
+            <label
+              ><input type="radio" name="q4" value="c" /> c) Con
+              normalización</label
+            >
+            <label
+              ><input type="radio" name="q4" value="d" /> d) Con claves
+              foráneas</label
+            >
+          </div>
+          <div class="question">
+            <p>5. ¿Qué mejora la creación de índices?</p>
+            <label
+              ><input type="radio" name="q5" value="a" /> a) Espacio de
+              almacenamiento</label
+            >
+            <label
+              ><input type="radio" name="q5" value="b" /> b) Velocidad de
+              búsqueda</label
+            >
+            <label
+              ><input type="radio" name="q5" value="c" /> c) Diseño
+              conceptual</label
+            >
+            <label
+              ><input type="radio" name="q5" value="d" /> d) Relaciones de
+              datos</label
+            >
+          </div>
+
+          <h3>Preguntas Verdadero o Falso</h3>
+          <div class="question">
+            <p>1. Un diagrama ER depende del SGBD.</p>
+            <label
+              ><input type="radio" name="q6" value="true" /> Verdadero</label
+            >
+            <label><input type="radio" name="q6" value="false" /> Falso</label>
+          </div>
+          <div class="question">
+            <p>2. La normalización elimina todas las redundancias.</p>
+            <label
+              ><input type="radio" name="q7" value="true" /> Verdadero</label
+            >
+            <label><input type="radio" name="q7" value="false" /> Falso</label>
+          </div>
+          <div class="question">
+            <p>3. Una clave foránea debe ser única.</p>
+            <label
+              ><input type="radio" name="q8" value="true" /> Verdadero</label
+            >
+            <label><input type="radio" name="q8" value="false" /> Falso</label>
+          </div>
+          <div class="question">
+            <p>4. El diseño físico incluye optimización de consultas.</p>
+            <label
+              ><input type="radio" name="q9" value="true" /> Verdadero</label
+            >
+            <label><input type="radio" name="q9" value="false" /> Falso</label>
+          </div>
+          <div class="question">
+            <p>
+              5. Las bases de datos relacionales solo usan claves primarias.
+            </p>
+            <label
+              ><input type="radio" name="q10" value="true" /> Verdadero</label
+            >
+            <label><input type="radio" name="q10" value="false" /> Falso</label>
+          </div>
+          <br />
+          <button class="btn" onclick="submitFinalQuiz()">Enviar</button>
+          <div id="quizFeedback"></div>
+          <br />
+          <button class="btn" onclick="downloadFinalReport()">
+            Descargar Reporte Final
+          </button>
+          <button class="btn" onclick="showSection('sintesis')">
+            Siguiente
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Síntesis -->
+    <section id="sintesis" class="section">
+      <div class="container">
+        <div class="card">
+          <h2>Síntesis</h2>
+          <p>Ideas clave del curso:</p>
+          <ul>
+            <li>
+              <strong>Modelamiento Conceptual:</strong> Uso de diagramas ER.
+            </li>
+            <li><strong>Diseño Lógico:</strong> Normalización de tablas.</li>
+            <li><strong>Diseño Físico:</strong> Optimización con índices.</li>
+            <li>
+              <strong>Claves:</strong> Primarias y foráneas para relaciones.
+            </li>
+            <li><strong>SQL:</strong> Consultas eficientes.</li>
+          </ul>
+          <div id="infographic" class="infographic">
+            <svg
+              class="db-icon"
+              viewBox="0 0 200 100"
+              fill="none"
+              stroke="#BC955C"
+              stroke-width="2"
+            >
+              <rect x="10" y="10" width="40" height="80" fill="#006657" />
+              <rect x="60" y="10" width="40" height="80" fill="#691C32" />
+              <rect x="110" y="10" width="40" height="80" fill="#006657" />
+              <path d="M20 20v60M70 20v60M120 20v60" stroke="#BC955C" />
+              <text x="35" y="95" fill="#BC955C">Conceptual</text>
+              <text x="85" y="95" fill="#BC955C">Lógico</text>
+              <text x="135" y="95" fill="#BC955C">Físico</text>
+            </svg>
+          </div>
+          <button class="btn" onclick="showSection('cierre')">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cierre -->
+    <section id="cierre" class="section">
+      <div class="container">
+        <div class="card">
+          <h2>Cierre y Reflexión</h2>
+          <p>Reflexiona sobre tu aprendizaje:</p>
+          <form id="reflectionForm">
+            <div class="input-group">
+              <label>1. ¿Qué aprendiste?</label>
+              <textarea
+                required
+                aria-required="true"
+                aria-describedby="r1-error"
+                id="r1"
+              ></textarea>
+              <span id="r1-error" class="error" role="alert"></span>
+            </div>
+            <div class="input-group">
+              <label>2. ¿Cómo lo aplicarías?</label>
+              <textarea
+                required
+                aria-required="true"
+                aria-describedby="r2-error"
+                id="r2"
+              ></textarea>
+              <span id="r2-error" class="error" role="alert"></span>
+            </div>
+            <div class="input-group">
+              <label>3. ¿Qué desafíos tuviste?</label>
+              <textarea
+                required
+                aria-required="true"
+                aria-describedby="r3-error"
+                id="r3"
+              ></textarea>
+              <span id="r3-error" class="error" role="alert"></span>
+            </div>
+            <button type="submit" class="btn">Guardar</button>
+          </form>
+          <div id="saveMessage" class="message" role="alert"></div>
+          <div id="savedResponses" class="saved-responses"></div>
+          <br />
+          <button class="btn" onclick="downloadQuizReport()">
+            Descargar Resultados Video-Quiz
+          </button>
+          <button class="btn" onclick="downloadFinalReport()">
+            Descargar Reporte Final
+          </button>
+          <button class="btn" onclick="showSection('certificado')">
+            Generar Certificado
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificado -->
+    <section id="certificado" class="section">
+      <div class="container">
+        <div class="card">
+          <h2>Certificado</h2>
+          <div id="certificate" class="certificate">
+            <h3>Certificado</h3>
+            <p id="cert-text"></p>
+            <div id="qr-code"></div>
+            <svg
+              class="ai-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#BC955C"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 8v8m-4-4h8" />
+            </svg>
+          </div>
+          <button class="btn" onclick="downloadCertificate()">
+            Descargar Certificado
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
